@@ -59,7 +59,7 @@ const getRandomJokeXML = (num) => {
     tempJokes[i] = `<joke><q>${shuffleJokes[i].q}</q><a>${shuffleJokes[i].a}</a></joke>`;
   }
 
-  // Return first joke 
+  // Return first joke
   if (limit === 1) return tempJokes[0];
 
   // Return joke array
@@ -67,9 +67,9 @@ const getRandomJokeXML = (num) => {
 };
 
 // SEND RESPONSE TO THE SERVER
-const getRandomJokeResponse = (request, response, params , acceptedTypes, httpMethod) => {
-    // XML Data
-    if (acceptedTypes.includes('text/xml')) {
+const getRandomJokeResponse = (request, response, params, acceptedTypes) => {
+  // XML Data
+  if (acceptedTypes.includes('text/xml')) {
     response.writeHead(200, { 'Content-Type': 'text/xml' });
     response.write(getRandomJokeXML(params));
     response.end();

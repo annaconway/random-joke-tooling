@@ -27,26 +27,11 @@ const onRequest = (request, response) => {
   let acceptedTypes = request.headers.accept && request.headers.accept.split(',');
   acceptedTypes = acceptedTypes || [];
 
-  const httpMethod = request.method;
-
-  // ALWAYS GIVE CREDIT - in your code comments and documentation
-  // Source: https://stackoverflow.com/questions/2219526/how-many-bytes-in-a-javascript-string/29955838
-  // Refactored to an arrow function by ACJ
-  const getBinarySize = string => Buffer.byteLength(string, 'utf8');
-
-  if (httpMethod === HEAD) {
-    const getContentType = httpMethod.getHead;
-
-  }
-
   if (urlStruct[pathname]) {
-    urlStruct[pathname](request, response, limit, acceptedTypes, httpMethod);
-  } else if (urlStruct[pathname]) {
-    urlStruct[pathname](request, response);
+    urlStruct[pathname](request, response, limit, acceptedTypes);
   } else {
     urlStruct.notFound(request, response);
   }
 };
 
-
-// console.log(`Listening on 127.0.0.1: ${port}`);
+http.createServer(onRequest).listen(port);
